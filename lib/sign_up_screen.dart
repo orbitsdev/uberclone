@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uberclone/controller/authcontroller.dart';
-import 'package:uberclone/login_screen.dart';
-
-import 'dialog/notificationdialog.dart';
+import 'package:uberclone/dialog/notificationdialog.dart';
+import 'package:uberclone/helper/firebase_helper.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const screenName = '/sigup';
@@ -13,7 +12,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final authcontroller = Get.put(Authcontroller());
+  final authxcontroller = Get.find<Authcontroller>();
+  
   final namefield = TextEditingController();
   final mobilefield = TextEditingController();
   final emailfield = TextEditingController();
@@ -21,13 +21,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final confirmfield = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
-  void singupUser() {
+  void singupUser() async {
     final isvalidated = _formkey.currentState!.validate();
 
     if (isvalidated) {
       _formkey.currentState!.save();
-      authcontroller.creatUser(namefield.text, mobilefield.text,
+
+       await authxcontroller.creatUser(namefield.text, mobilefield.text,
           emailfield.text, passwordfield.text);
+       
     }
   }
 
@@ -54,10 +56,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return null;
                 },
                 decoration: InputDecoration(
+                  hintStyle: TextStyle(fontSize: 10, color: Colors.grey),
                   labelText: 'Name',
+                  labelStyle: TextStyle(fontSize: 14),
                   prefixIcon: Icon(Icons.account_circle),
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(fontSize: 14),
               ),
               SizedBox(
                 height: 10.0,
@@ -73,10 +78,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return null;
                 },
                 decoration: InputDecoration(
+                  hintStyle: TextStyle(
+                    fontSize: 10,
+                  ),
+                  labelStyle: TextStyle(fontSize: 14),
                   labelText: 'Mobile',
                   prefixIcon: Icon(Icons.phone),
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(fontSize: 14),
               ),
               SizedBox(
                 height: 10.0,
@@ -97,9 +107,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 decoration: InputDecoration(
                   labelText: 'Email',
+                  hintStyle: TextStyle(fontSize: 10),
+                  labelStyle: TextStyle(fontSize: 14),
                   prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(fontSize: 14),
               ),
               SizedBox(
                 height: 10.0,
@@ -120,21 +133,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  hintStyle: TextStyle(fontSize: 10),
+                  labelStyle: TextStyle(fontSize: 14),
                   prefixIcon: Icon(Icons.vpn_key),
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(fontSize: 14),
               ),
               SizedBox(
                 height: 10.0,
               ),
               TextFormField(
-                keyboardType: TextInputType.text, 
+                keyboardType: TextInputType.text,
                 controller: confirmfield,
                 textInputAction: TextInputAction.done,
                 onFieldSubmitted: (_) {
                   singupUser();
                 },
-
                 validator: (value) {
                   if (value != passwordfield.text) {
                     return 'Password did not match';
@@ -142,6 +157,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return null;
                 },
                 decoration: InputDecoration(
+                  hintStyle: TextStyle(fontSize: 10),
+                  labelStyle: TextStyle(fontSize: 14),
                   labelText: 'Confirm Password',
                   prefixIcon: Icon(Icons.vpn_key),
                   border: OutlineInputBorder(),
@@ -150,16 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 height: 15.0,
               ),
-              Obx(() {
-                if (authcontroller.isSignup.value) {
-                  return Container(
-                      height: 24,
-                      width: 24,
-                      child: Center(child: CircularProgressIndicator()));
-                } else {
-                  return Column(
-                    children: [
-                      ElevatedButton(
+               ElevatedButton(
                           onPressed: () {
                             singupUser();
                           },
@@ -170,6 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         height: 15.0,
                       ),
+                      
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -178,7 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             width: 5,
                           ),
                           GestureDetector(
-                            child: const Text('Signup',
+                            child: const Text('Signin',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 )),
@@ -188,10 +197,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ],
                       ),
-                    ],
-                  );
-                }
-              }),
             ],
           ),
         ),
