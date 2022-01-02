@@ -6,15 +6,17 @@ import 'package:uberclone/login_screen.dart';
 class RiderHomeScreen extends StatelessWidget {
   static const screenName = '/riderhome';
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Homes'),
       ),
-      body: ElevatedButton(onPressed: (){
-        authinstance.signOut();
-        Get.offNamed(LoginScreen.screenName);
-      }, child: Text('Logout')),
+      body: ElevatedButton(
+          onPressed: () {
+            authinstance.signOut();
+            Get.offNamed(LoginScreen.screenName);
+          },
+          child: Text('Logout')),
     );
   }
 }
