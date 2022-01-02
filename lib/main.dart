@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:uberclone/login_screen.dart';
+import 'package:uberclone/screens/home_screen.dart';
 import 'package:uberclone/screens/rider_home_screen.dart';
 import 'package:uberclone/sign_up_screen.dart';
 
@@ -11,6 +12,7 @@ Future<void> main() async {
 
   try {
     await Firebase.initializeApp(
+        name: 'SecondaryApp',
         options: FirebaseOptions(
             apiKey: "AIzaSyC3dp1B8Fe6SRtLkZ1Z6mQZtes1Q7868VA",
             appId: '1:986922107564:android:16ecd2cd75eb00c2c49509',
@@ -42,11 +44,12 @@ class _UbberAppState extends State<UbberApp> {
         primaryColor: Colors.pinkAccent,
         primarySwatch: Colors.pink,
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
       getPages: [
         GetPage(name: LoginScreen.screenName, page: () => LoginScreen()),
         GetPage(name: SignUpScreen.screenName, page: () => SignUpScreen()),
-        GetPage(name: RiderHomeScreen.screenName, page: ()=> RiderHomeScreen())
+        GetPage( name: RiderHomeScreen.screenName, page: () => RiderHomeScreen()),
+        GetPage(name: HomeScreen.screenName, page: () => HomeScreen()),
       ],
       debugShowCheckedModeBanner: false,
     );
