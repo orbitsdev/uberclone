@@ -5,6 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:uberclone/login_screen.dart';
 import 'package:uberclone/screens/home_screen.dart';
 import 'package:uberclone/screens/rider_home_screen.dart';
+import 'package:uberclone/screens/search_screen.dart';
 import 'package:uberclone/sign_up_screen.dart';
 
 Future<void> main() async {
@@ -48,10 +49,14 @@ class _UbberAppState extends State<UbberApp> {
       getPages: [
         GetPage(name: LoginScreen.screenName, page: () => LoginScreen()),
         GetPage(name: SignUpScreen.screenName, page: () => SignUpScreen()),
-        GetPage( name: RiderHomeScreen.screenName, page: () => RiderHomeScreen()),
+        GetPage(
+            name: RiderHomeScreen.screenName, page: () => RiderHomeScreen()),
         GetPage(name: HomeScreen.screenName, page: () => HomeScreen()),
+        GetPage(name: SearchScreen.screenName, page: () => SearchScreen()),
       ],
       debugShowCheckedModeBanner: false,
     );
   }
+
+  
 }

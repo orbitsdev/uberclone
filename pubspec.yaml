@@ -37,6 +37,7 @@ dependencies:
   google_maps_flutter: ^2.1.1
   geolocator: ^8.0.1
   http: ^0.13.4
+  flutter_polyline_points: ^1.0.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -63,8 +64,18 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/image/car_android.png
+    - assets/image/car_ios.png
+    - assets/image/desticon.png
+    - assets/image/desticon1.png
+    - assets/image/logo.png
+    - assets/image/logo1.png
+    - assets/image/pickicon.png
+    - assets/image/posimarker.png
+    - assets/image/redmarker.png
+    - assets/image/taxi.png
+    - assets/image/user_icon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
